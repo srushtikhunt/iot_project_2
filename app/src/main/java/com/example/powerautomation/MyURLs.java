@@ -9,6 +9,38 @@ public class MyURLs {
         return strLoginURL;
     }
 
+    public static String setOnOff(String flag, String username, String password){
+        String startURL = "http://sgh2020.tonysolutions.co/update_board.php" +
+                "?uname=" + username +
+                "&flag=" + flag +
+                "&s_time=" + 0 +
+                "&w_time=" + 0 +
+                "&pass=" + password;
+
+        return startURL;
+    }
+
+    public static String setSchedule(int waitMin, int runMin, String username, String password){
+        String scheduleURL = "http://sgh2020.tonysolutions.co/update_board.php";
+
+        if(waitMin == 0){
+            return scheduleURL +
+                    "?uname=" + username +
+                    "&flag=" + 1 +
+                    "&s_time=" + runMin +
+                    "&w_time=" + 0 +
+                    "&pass=" + password;
+        } else {
+            return scheduleURL +
+                    "?uname=" + username +
+                    "&flag=" + 0 +
+                    "&s_time=" + runMin +
+                    "&w_time=" + waitMin +
+                    "&pass=" + password;
+        }
+
+    }
+
 
 
 }
