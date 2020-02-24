@@ -76,6 +76,7 @@ public class PowerControl extends AppCompatActivity {
         });
 
         enableScheduler(false);
+        scheduleContainer.setVisibility(View.INVISIBLE);
 
         swSchedule.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -84,9 +85,12 @@ public class PowerControl extends AppCompatActivity {
                     powerOn.setEnabled(false);
                     powerOff.setEnabled(false);
                     enableScheduler(true);
+                    scheduleContainer.setVisibility(View.VISIBLE);
                 } else {
                     setPowerButtons();
                     enableScheduler(false);
+                    scheduleContainer.setVisibility(View.INVISIBLE);
+
                 }
             }
         });
@@ -119,7 +123,9 @@ public class PowerControl extends AppCompatActivity {
 
                             Toast.makeText(PowerControl.this, "Set On", Toast.LENGTH_SHORT).show();
                             powerOn.setEnabled(false);
+                            powerOn.setBackgroundColor(Color.parseColor("#684CAF50"));
                             powerOff.setEnabled(true);
+                            powerOff.setBackgroundColor(Color.parseColor("#F44336"));
 
                             setRunningStatus(true);
 
@@ -164,7 +170,9 @@ public class PowerControl extends AppCompatActivity {
                             Toast.makeText(PowerControl.this, "Set OFF", Toast.LENGTH_SHORT).show();
 
                             powerOn.setEnabled(true);
+                            powerOn.setBackgroundColor(Color.parseColor("#4CAF50"));
                             powerOff.setEnabled(false);
+                            powerOff.setBackgroundColor(Color.parseColor("#88F44336"));
 
                             setRunningStatus(false);
 
@@ -240,14 +248,17 @@ public class PowerControl extends AppCompatActivity {
         if(sharedPreferences.getString("powerOn", "0").equals("0")){
             //when system is off
             powerOn.setEnabled(true);
+            powerOn.setBackgroundColor(Color.parseColor("#4CAF50"));
             powerOff.setEnabled(false);
 
+            powerOff.setBackgroundColor(Color.parseColor("#88F44336"));
             setRunningStatus(false);
 
         } else {
             powerOn.setEnabled(false);
+            powerOn.setBackgroundColor(Color.parseColor("#684CAF50"));
             powerOff.setEnabled(true);
-
+            powerOff.setBackgroundColor(Color.parseColor("#F44336"));
             setRunningStatus(true);
         }
     }

@@ -97,19 +97,17 @@ public class SendSMS extends AppCompatActivity {
             }
         });
 
-        enableScheduler(false);
+        scheduleContainer.setVisibility(View.INVISIBLE);
 
         swSchedule.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(swSchedule.isChecked()) {
-                    powerOn.setEnabled(false);
-                    powerOff.setEnabled(false);
-                    enableScheduler(true);
+                    setPowerButtonsSMS(false);
+                    scheduleContainer.setVisibility(View.VISIBLE);
                 } else {
-                    powerOn.setEnabled(true);
-                    powerOff.setEnabled(true);
-                    enableScheduler(false);
+                    setPowerButtonsSMS(true);
+                    scheduleContainer.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -131,11 +129,11 @@ public class SendSMS extends AppCompatActivity {
                 timeFormat = new SimpleDateFormat("HH:mm:ss");
                 time = timeFormat.format(calendar.getTime());
 
-                String onSMS = "1,0,0,"+date+","+time;
+                String onSMS = "1,0,0,"+date+" "+time;
                 Log.i("sendSMSOnOff", onSMS);
 //                SmsManager sms=SmsManager.getDefault();
 //                sms.sendTextMessage("7016286449", null, onSMS, null,null);
-                sendSMS("7016286449", onSMS);
+                sendSMS("7874377027", onSMS);
 
             }
         });
@@ -154,11 +152,11 @@ public class SendSMS extends AppCompatActivity {
                 timeFormat = new SimpleDateFormat("HH:mm:ss");
                 time = timeFormat.format(calendar.getTime());
 
-                String onSMS = "0,0,0,"+date+","+time;
+                String onSMS = "0,0,0,"+date+" "+time;
                 Log.i("sendSMSOnOff", onSMS);
 //                SmsManager sms=SmsManager.getDefault();
 //                sms.sendTextMessage("7016286449", null, onSMS, null,null);
-                sendSMS("7016286449", onSMS);
+                sendSMS("7874377027", onSMS);
             }
         });
 
@@ -190,18 +188,16 @@ public class SendSMS extends AppCompatActivity {
                 time = timeFormat.format(calendar.getTime());
 
                 if(waitFor == 0){
-                    String onSMS = "1,0," + runFor + ","+date+","+time;
+                    String onSMS = "1,0," + runFor + ","+date+" "+time;
                     Log.i("sendSMSOnOff", onSMS);
-                    sendSMS("7016286449", onSMS);
+                    sendSMS("7874377027", onSMS);
                 } else {
-                    String onSMS = "0," + waitFor + "," + runFor + ","+date+","+time;
+                    String onSMS = "0," + waitFor + "," + runFor + ","+date+" "+time;
                     Log.i("sendSMSOnOff", onSMS);
-                    sendSMS("7016286449", onSMS);
+                    sendSMS("7874377027", onSMS);
                 }
             }
         });
-
-
     }
 
     private void sendSMS(String phoneNumber, String message)
@@ -267,19 +263,20 @@ public class SendSMS extends AppCompatActivity {
         sms.sendTextMessage(phoneNumber, null, message, sentPI, deliveredPI);
     }
 
-    private void setPowerButtons() {
-        if(sharedPreferences.getString("powerOn", "0").equals("0")){
-            //when system is off
+    private void setPowerButtonsSMS(boolean b) {
+        if(b){
+            //when toggle is on
             powerOn.setEnabled(true);
-            powerOff.setEnabled(false);
+            powerOn.setBackgroundColor(Color.parseColor("#4CAF50"));
 
-            setRunningStatus(false);
-
+            powerOff.setEnabled(true);
+            powerOff.setBackgroundColor(Color.parseColor("#F44336"));
         } else {
             powerOn.setEnabled(false);
-            powerOff.setEnabled(true);
+            powerOn.setBackgroundColor(Color.parseColor("#684CAF50"));
+            powerOff.setEnabled(false);
+            powerOff.setBackgroundColor(Color.parseColor("#88F44336"));
 
-            setRunningStatus(true);
         }
     }
 

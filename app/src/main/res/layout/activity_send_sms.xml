@@ -8,6 +8,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
+        android:background="#F1EDED"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -46,6 +47,9 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:text="ON"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:background="#4CAF50"
         app:layout_constraintEnd_toStartOf="@+id/powerOff"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -58,6 +62,9 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:text="OFF"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:background="#F44336"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/powerOn"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -76,6 +83,7 @@
         app:layout_constraintTop_toBottomOf="@+id/powerOn" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="#2F2196F3"
         android:id="@+id/scheduleContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -102,23 +110,57 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Spinner
-            android:id="@+id/waitHour"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="Minutes"
+
+            android:textColor="#000"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/waitTimer" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="50dp"
+            android:text="Hours"
+            android:textColor="#000"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/textView2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/waitTimer" />
 
         <Spinner
-            android:id="@+id/waitMin"
-            android:layout_width="100dp"
+            android:id="@+id/waitHour"
+            style="@style/spinner_style"
+            android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginStart="48dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toStartOf="@+id/waitMin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <Spinner
+            android:id="@+id/waitMin"
+            style="@style/spinner_style"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/waitHour"
-            app:layout_constraintTop_toBottomOf="@+id/waitTimer" />
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <TextView
             android:id="@+id/durationTimer"
@@ -133,33 +175,72 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/waitHour" />
 
-        <Spinner
-            android:id="@+id/runHour"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="32dp"
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="Hours"
+
+            android:textColor="#000"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/textView3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/durationTimer" />
 
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+
+            android:text="Minutes"
+            android:textColor="#000"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/durationTimer" />
+
+        <Spinner
+            android:id="@+id/runHour"
+            style="@style/spinner_style"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toStartOf="@+id/runMin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
         <Spinner
             android:id="@+id/runMin"
-            android:layout_width="100dp"
+            style="@style/spinner_style"
+            android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginStart="48dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/runHour"
-            app:layout_constraintTop_toBottomOf="@+id/durationTimer" />
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <Button
             android:id="@+id/scheduleStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="28dp"
             android:layout_marginEnd="32dp"
+            android:background="#8BC34A"
+
             android:text="Start"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/runMin" />
 
