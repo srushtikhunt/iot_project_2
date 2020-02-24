@@ -58,15 +58,11 @@ public class PowerControl extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(swSchedule.isChecked()) {
-//                    scheduleContainer.setVisibility(View.GONE);
-//                    scheduleContainer.setEnabled(false);
                     powerOn.setEnabled(false);
                     powerOff.setEnabled(false);
 
                     enableScheduler(true);
                 } else {
-//                    scheduleContainer.setVisibility(View.VISIBLE);
-//                    scheduleContainer.setEnabled(true);
                     powerOn.setEnabled(true);
                     powerOff.setEnabled(true);
 

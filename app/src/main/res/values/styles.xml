@@ -8,4 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="LoginScreen" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:fontFamily">@font/merriweather_regular</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textColorHint">#fff</item>
+        <item name="android:padding">20sp</item>
+        <item name="android:layout_marginHorizontal">30sp</item>
+    </style>
+
 </resources>
