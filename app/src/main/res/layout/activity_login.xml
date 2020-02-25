@@ -4,28 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login"
-    android:orientation="vertical"
+    android:background="#FFEBEE"
     android:gravity="center"
-    android:background="#4f5b62">
+    android:orientation="vertical"
+    tools:context=".Login">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginBottom="10sp"
         android:gravity="center"
-        android:layout_marginBottom="10sp">
+        android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Login"
-            android:textStyle="bold"
-            android:textSize="24sp"
-            android:textColor="#fff"
+            android:layout_width="242dp"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/merriweather_regular"
             android:padding="20sp"
+            android:text="Login"
             android:textAlignment="center"
-            android:fontFamily="@font/merriweather_regular" />
+            android:textColor="#036903"
+            android:textSize="24sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -38,9 +38,12 @@
             style="@style/LoginScreen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Username"
+            android:gravity="center"
 
-            android:inputType="textEmailAddress"/>
+            android:hint="Enter Username"
+            android:inputType="textEmailAddress"
+            android:textColor="#036903"
+            android:textColorHint="#036903" />
     </LinearLayout>
 
     <LinearLayout
@@ -48,25 +51,33 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <EditText style="@style/LoginScreen"
+        <EditText
             android:id="@+id/password"
-            android:inputType="textPassword"
+            style="@style/LoginScreen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Password" />
+            android:gravity="center"
+            android:hint="Enter Password"
+            android:inputType="textPassword"
+            android:textColor="#036903"
+            android:textColorHint="#036903" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnLogin"
-            android:text="Login"/>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="181dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:background="#036903"
+        android:text="Login"
+        android:textColor="#FFEBEE" />
 
 </LinearLayout>
