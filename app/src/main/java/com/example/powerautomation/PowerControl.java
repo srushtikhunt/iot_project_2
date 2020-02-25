@@ -43,6 +43,8 @@ public class PowerControl extends AppCompatActivity {
 
     TextView tvOnOff;
 
+    static boolean lowMoisture = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +106,18 @@ public class PowerControl extends AppCompatActivity {
         powerOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                isMoistureLow();
+                System.out.println(lowMoisture);
+                if(lowMoisture == false){
+                    Log.i("moisture", "false");
+                    Log.i("moisture", "getT");
+                    Toast.makeText(PowerControl.this,
+                            "Moisture is greater then 45. Didnt start system.",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 String startMotor = MyURLs.setOnOff("1", username, password);
 
                 Log.i("checkOnOff", startMotor);
@@ -206,6 +220,16 @@ public class PowerControl extends AppCompatActivity {
                 int waitFor = (Integer.parseInt(waitHour) * 60) + Integer.parseInt(waitMin);
                 int runFor = (Integer.parseInt(runHour) * 60) + Integer.parseInt(runMin);
 
+                if(waitFor == 0){
+                    isMoistureLow();
+                    if(lowMoisture == false){
+                        Toast.makeText(PowerControl.this,
+                                "Moisture is greater then 45. Didnt start system.",
+                                Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+
                 Log.i("scheduleOnOff", Integer.toString(waitFor) + " " + Integer.toString(runFor));
 
                 String startSchedule = MyURLs.setSchedule(waitFor, runFor, username, password);
@@ -242,6 +266,33 @@ public class PowerControl extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void isMoistureLow() {
+        String strMoisture = "http://sgh2020.tonysolutions.co/get_mos.php?id=1";
+        queue = Volley.newRequestQueue(PowerControl.this);
+        StringRequest request = new StringRequest(Request.Method.GET,
+                strMoisture
+                , new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i("moisture", response);
+                if(Integer.parseInt(response) > 45){
+                    Log.i("moisture", "inside");
+                    lowMoisture = false;
+                } else {
+                    Log.i("moisture", "setT");
+                    lowMoisture = true;
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("error",error.toString());
+                lowMoisture = false;
+            }
+        });
+        queue.add(request);
     }
 
     private void setPowerButtons() {

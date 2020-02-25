@@ -60,6 +60,7 @@ public class SendSMS extends AppCompatActivity {
     private String date, time;
 
     LinearLayout linearLayout;
+    static boolean lowMoisture = false;
 
 
     @Override
@@ -118,22 +119,33 @@ public class SendSMS extends AppCompatActivity {
         powerOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String startMotor = MyURLs.setOnOff("1", username, password);
+                Log.i("moistureBefore", Boolean.toString(lowMoisture));
+                isMoistureLow();
+                Log.i("moistureAfter", Boolean.toString(lowMoisture));
+                if(lowMoisture == false){
+                    Toast.makeText(SendSMS.this, "Moisture is greater then 45. Didnt start system.",
+                            Toast.LENGTH_SHORT).show();
 
-                Log.i("checkOnOff", startMotor);
+                } else {
+                    String startMotor = MyURLs.setOnOff("1", username, password);
+
+                    Log.i("checkOnOff", startMotor);
 
 
-                calendar = Calendar.getInstance();
-                dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                date = dateFormat.format(calendar.getTime());
-                timeFormat = new SimpleDateFormat("HH:mm:ss");
-                time = timeFormat.format(calendar.getTime());
+                    calendar = Calendar.getInstance();
+                    dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    date = dateFormat.format(calendar.getTime());
+                    timeFormat = new SimpleDateFormat("HH:mm:ss");
+                    time = timeFormat.format(calendar.getTime());
 
-                String onSMS = "1,0,0,"+date+" "+time;
-                Log.i("sendSMSOnOff", onSMS);
+                    String onSMS = "1,0,0,"+date+" "+time;
+                    Log.i("sendSMSOnOff", onSMS);
 //                SmsManager sms=SmsManager.getDefault();
 //                sms.sendTextMessage("7016286449", null, onSMS, null,null);
-                sendSMS("7874377027", onSMS);
+                    sendSMS("7874377027", onSMS);
+                }
+
+
 
             }
         });
@@ -218,7 +230,7 @@ public class SendSMS extends AppCompatActivity {
                 switch (getResultCode())
                 {
                     case Activity.RESULT_OK:
-                        Toast.makeText(getBaseContext(), "SMS sent",
+                        Toast.makeText(getBaseContext(), "Acknowledgement Received",
                                 Toast.LENGTH_SHORT).show();
                         break;
                     case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
@@ -261,6 +273,42 @@ public class SendSMS extends AppCompatActivity {
 
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(phoneNumber, null, message, sentPI, deliveredPI);
+    }
+
+    private boolean setMotorOnOff() {
+        isMoistureLow();
+        if(lowMoisture){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private void isMoistureLow() {
+        String strMoisture = "http://sgh2020.tonysolutions.co/get_mos.php?id=1";
+
+        queue = Volley.newRequestQueue(SendSMS.this);
+        StringRequest request = new StringRequest(Request.Method.GET,
+                strMoisture
+                , new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i("smsMoisture", response);
+                if(Integer.parseInt(response) > 45){
+                    Log.i("smsMoisture", "false");
+                    lowMoisture = false;
+                } else {
+                    lowMoisture = true;
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("error",error.toString());
+                lowMoisture = false;
+            }
+        });
+        queue.add(request);
     }
 
     private void setPowerButtonsSMS(boolean b) {
