@@ -122,9 +122,8 @@ public class SendSMS extends AppCompatActivity {
                 Log.i("moistureBefore", Boolean.toString(lowMoisture));
                 isMoistureLow();
                 Log.i("moistureAfter", Boolean.toString(lowMoisture));
-                if(lowMoisture == false){
-                    Toast.makeText(SendSMS.this, "Moisture is greater then 45. Didnt start system.",
-                            Toast.LENGTH_SHORT).show();
+                if(!lowMoisture){
+                  //  Toast.makeText(SendSMS.this, "Moisture is greater then 45. Didnt start system.",Toast.LENGTH_SHORT).show();
 
                 } else {
                     String startMotor = MyURLs.setOnOff("1", username, password);
@@ -142,7 +141,7 @@ public class SendSMS extends AppCompatActivity {
                     Log.i("sendSMSOnOff", onSMS);
 //                SmsManager sms=SmsManager.getDefault();
 //                sms.sendTextMessage("7016286449", null, onSMS, null,null);
-                    sendSMS("7874377027", onSMS);
+                    sendSMS("9428452162", onSMS);
                 }
 
 
@@ -168,7 +167,7 @@ public class SendSMS extends AppCompatActivity {
                 Log.i("sendSMSOnOff", onSMS);
 //                SmsManager sms=SmsManager.getDefault();
 //                sms.sendTextMessage("7016286449", null, onSMS, null,null);
-                sendSMS("7874377027", onSMS);
+                sendSMS("9428452162", onSMS);
             }
         });
 
@@ -202,11 +201,11 @@ public class SendSMS extends AppCompatActivity {
                 if(waitFor == 0){
                     String onSMS = "1,0," + runFor + ","+date+" "+time;
                     Log.i("sendSMSOnOff", onSMS);
-                    sendSMS("7874377027", onSMS);
+                    sendSMS("9428452162", onSMS);
                 } else {
                     String onSMS = "0," + waitFor + "," + runFor + ","+date+" "+time;
                     Log.i("sendSMSOnOff", onSMS);
-                    sendSMS("7874377027", onSMS);
+                    sendSMS("9428452162", onSMS);
                 }
             }
         });

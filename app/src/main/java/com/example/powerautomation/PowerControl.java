@@ -112,9 +112,7 @@ public class PowerControl extends AppCompatActivity {
                 if(lowMoisture == false){
                     Log.i("moisture", "false");
                     Log.i("moisture", "getT");
-                    Toast.makeText(PowerControl.this,
-                            "Moisture is greater then 45. Didnt start system.",
-                            Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(PowerControl.this, "Moisture is greater then 45. Didnt start system.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

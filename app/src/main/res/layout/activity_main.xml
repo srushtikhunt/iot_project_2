@@ -14,7 +14,7 @@
         android:layout_marginTop="36dp"
         android:layout_marginEnd="32dp"
         android:background="#036903"
-        android:text="Power Control"
+        android:text="iot"
         android:textColor="#fff"
         android:textSize="24sp"
         android:textStyle="bold"
